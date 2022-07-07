@@ -64,27 +64,30 @@ public class CtrlVistaLogin implements ActionListener{
     public void iniciar(){//Abre una ventana de acuerdo al tipo de usuario
         VistaPrincipal ventanaUsuario = new VistaPrincipal();
         if(usuario instanceof Administrador){
-
-            ventanaUsuario.general.remove(ventanaUsuario.administrador);
+            //AQUI SE CREAN LOS CONTROLADORES DE LAS VISTAS QUE DEBE OCUPAR CADA TIPO DE USUARIO
+            ventanaUsuario.setVisible(true);
+            return;
         }
         if(usuario instanceof Autorizador){
             ventanaUsuario.general.remove(ventanaUsuario.administrador);
-            //ventanaUsuario.administrador.setVisible(false);
+            ventanaUsuario.setVisible(true);
+            return:
         }
         if(usuario instanceof Solicitante){
+            Ctrl_MisSolicitudes ctrlSolicitudes = new Ctrl_MisSolicitudes(ventanaUsuario);
             ventanaUsuario.general.remove(ventanaUsuario.administrador);
             ventanaUsuario.general.remove(ventanaUsuario.solicitudes);
+            ventanaUsuario.setVisible(true);
+            return;
         }
         if(usuario instanceof Usuario){
             ventanaUsuario.general.remove(ventanaUsuario.administrador);
             ventanaUsuario.general.remove(ventanaUsuario.solicitudes);
             ventanaUsuario.general.remove(ventanaUsuario.misSolicitudes);
-            JOptionPane.showMessageDialog(null, "Instanceof", "Error", 2);
+            ventanaUsuario.setVisible(true);
+            return;
         }    
-        JOptionPane.showMessageDialog(null, "Se ha iniciado el programa", "Error", 2);
-        Ctrl_MisSolicitudes ctrlSolicitudes = new Ctrl_MisSolicitudes(ventanaUsuario);
-        JOptionPane.showMessageDialog(null, "Se ha salido del constructor de mis solicitudes", "Error", 2);
-        ventanaUsuario.setVisible(true);
+    
     }
     
     public void ingresar(){//Revisa si el usuario existe y obtiene sus datos
